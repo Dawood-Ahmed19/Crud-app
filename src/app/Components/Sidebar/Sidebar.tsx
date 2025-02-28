@@ -20,8 +20,9 @@ import {
   logoutUser,
 } from "@import/app/store/features/userSlice";
 import { useRouter } from "next/navigation";
+import { setSelectedComponent } from "@import/app/store/features/uiSlice";
 
-const Sidebar = () => {
+const Sidebar = (): any => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const name = useSelector(selectUserName);
@@ -62,7 +63,10 @@ const Sidebar = () => {
           <FontAwesomeIcon icon={faBookmark} className="min-w-[20px]" />
           Course
         </button>
-        <button className="flex items-center gap-2">
+        <button
+          onClick={() => dispatch(setSelectedComponent("Students"))}
+          className="flex items-center gap-2 cursor-pointer"
+        >
           <FontAwesomeIcon icon={faGraduationCap} className="min-w-[20px]" />
           Students
         </button>

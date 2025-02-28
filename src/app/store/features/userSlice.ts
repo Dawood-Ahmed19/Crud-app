@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-// Define initial state
 interface UserState {
   name: string | null;
   email: string | null;
@@ -16,7 +15,6 @@ const initialState: UserState = {
   error: null,
 };
 
-// Async thunk to fetch user data from API
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",
   async (_, { rejectWithValue }) => {
@@ -31,7 +29,7 @@ export const fetchUser = createAsyncThunk(
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Attach token
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -50,7 +48,6 @@ export const fetchUser = createAsyncThunk(
   }
 );
 
-// User slice
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -65,7 +62,7 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.name = null;
       state.email = null;
-      sessionStorage.removeItem("token"); // Clear token on logout
+      sessionStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
@@ -86,11 +83,9 @@ const userSlice = createSlice({
   },
 });
 
-// Export actions & reducer
 export const { setUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;
 
-// Selectors
 export const selectUserName = (state: RootState) => state.user.name;
 export const selectUserEmail = (state: RootState) => state.user.email;
 export const selectUserLoading = (state: RootState) => state.user.loading;

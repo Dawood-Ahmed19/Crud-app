@@ -41,10 +41,8 @@ const LoginPage = () => {
         return;
       }
 
-      // Save token in sessionStorage
       sessionStorage.setItem("token", data.token);
 
-      // Store user info in state
       dispatch(setUser({ name: data.user.name, email: data.user.email }));
 
       setMessage("Login Successful");
