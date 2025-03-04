@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { clearStudents } from "@import/app/store/features/studentSlice";
 import type { AppDispatch } from "@import/app/store/store";
 import {
   fetchUser,
@@ -36,6 +37,9 @@ const Sidebar = (): any => {
   const handleLogout = () => {
     dispatch(logoutUser());
     sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    dispatch(clearStudents());
     router.push("/");
   };
 

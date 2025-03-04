@@ -28,18 +28,21 @@ const LoginPage = () => {
         body: JSON.stringify(values),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        setMessage(errorData.message);
-        return;
-      }
-
       const data = await res.json();
+      console.log("Login Response:", data);
 
-      if (!data.token) {
-        setMessage("No token received");
+      if (!res.ok) {
+        const errorData = data.error || "Login failed";
+        setMessage(errorData);
         return;
       }
+
+      if (!data.token || !data.user?._id) {
+        setMessage("Invalid login response");
+        return;
+      }
+
+      localStorage.setItem("userId", data.user._id);
 
       sessionStorage.setItem("token", data.token);
 
@@ -47,6 +50,7 @@ const LoginPage = () => {
 
       setMessage("Login Successful");
       setIsSuccess(true);
+
       router.push("/Hero");
     } catch (error) {
       console.error("Login error:", error);

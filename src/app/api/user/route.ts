@@ -8,8 +8,6 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 if (!JWT_SECRET) {
   throw new Error("JWT_SECRET is missing from environment variables");
 }
-
-// Get user by email
 export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
@@ -44,7 +42,6 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// Register a new user
 export async function POST(req: NextRequest) {
   try {
     await connectToDatabase();
@@ -86,7 +83,6 @@ export async function POST(req: NextRequest) {
   }
 }
 
-// Login user and store token in session storage
 export async function PUT(req: NextRequest) {
   try {
     await connectToDatabase();

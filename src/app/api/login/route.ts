@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Ensure JWT_SECRET is properly set
     if (!process.env.JWT_SECRET) {
       console.error("JWT_SECRET is missing");
       return NextResponse.json(
@@ -31,9 +30,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Generate Token
     const token = jwt.sign(
-      { email: user.email, name: user.name },
+      { userId: user._id.toString(), email: user.email, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -42,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       token,
-      user: { name: user.name, email: user.email },
+      user: { _id: user._id.toString(), name: user.name, email: user.email },
     });
   } catch (error) {
     console.error("Login error:", error);
