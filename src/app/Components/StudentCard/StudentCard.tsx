@@ -2,7 +2,29 @@
 
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { deleteStudent } from "@import/app/store/features/studentSlice";
+import { Student } from "@import/app/store/features/studentSlice";
 const StudentCard = ({ student }: { student: any }) => {
+  const dispatch = useDispatch();
+  const handleDelete = (id: string) => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("User not found! Please log in again.");
+      return;
+    }
+
+    const storedStudents: Student[] = JSON.parse(
+      localStorage.getItem(`students_${userId}`) || "[]"
+    );
+
+    const updatedStudents = storedStudents.filter((s: Student) => s._id !== id);
+
+    localStorage.setItem(`students_${userId}`, JSON.stringify(updatedStudents));
+
+    dispatch(deleteStudent(id));
+  };
+
   return (
     <div className="flex w-full items-center justify-between py-8 px-4 bg-white rounded-lg">
       <p className="w-1/4">{student.name}</p>
@@ -14,10 +36,12 @@ const StudentCard = ({ student }: { student: any }) => {
           icon={faPencil}
           className="text-blue-500 cursor-pointer"
         />
-        <FontAwesomeIcon
-          icon={faTrash}
-          className="text-red-500 cursor-pointer"
-        />
+        <button onClick={() => handleDelete(student._id)}>
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="text-red-500 cursor-pointer"
+          />
+        </button>
       </div>
     </div>
   );

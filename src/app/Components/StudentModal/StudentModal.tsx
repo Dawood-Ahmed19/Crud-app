@@ -6,7 +6,7 @@ import { addStudent } from "@import/app/store/features/studentSlice";
 import { useState } from "react";
 
 interface Student {
-  id: number;
+  _id: string;
   userId: string;
   name: string;
   email: string;
@@ -38,7 +38,7 @@ const StudentModal = (): any => {
     }
 
     const newStudent: Student = {
-      id: Date.now(),
+      _id: Date.now().toString(),
       userId,
       name: formData.name,
       email: formData.email,
