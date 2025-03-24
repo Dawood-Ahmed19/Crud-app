@@ -9,7 +9,6 @@ const HomePage = () => {
   );
   return (
     <section className="h-[100vh] flex">
-      <Sidebar />
       {selectedComponent === "Students" && <Students />}
     </section>
   );

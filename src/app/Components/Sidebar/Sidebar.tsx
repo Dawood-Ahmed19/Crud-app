@@ -44,7 +44,7 @@ const Sidebar = (): any => {
   };
 
   return (
-    <div className="h-full w-[15%] flex flex-col justify-between py-[18px] px-[40px] bg-[#F2EAE1]">
+    <div className="h-screen w-[15%] flex flex-col justify-between py-[18px] px-[40px] bg-[#F2EAE1]">
       <span>
         <span className="flex items-center">
           <span className="w-1 h-5 bg-yellow-500 mr-2"></span>

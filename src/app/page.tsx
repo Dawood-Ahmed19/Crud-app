@@ -1,6 +1,7 @@
-import LoginPage from "./login/page";
+import { redirect } from "next/navigation";
+
 const Page = (): any => {
-  return <LoginPage />;
+  return redirect("/login");
 };
 
 export default Page;

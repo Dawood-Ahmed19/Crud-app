@@ -1,23 +1,11 @@
-import "../Styles/globals.css";
-import { Metadata } from "next";
-import { Providers } from "./Providers";
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Create your tasks",
   description: "A simple task management application built with Next.js",
   keywords: ["task management", "next.js", "react"],
 };
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="icon" sizes="any" href="/favicon.svg" />
-      </head>
-      <body>
-        <Providers> {children}</Providers>
-      </body>
-    </html>
-  );
-};
 
-export default RootLayout;
+import RootLayout from "./RootLayout";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return <RootLayout>{children}</RootLayout>;
+}
