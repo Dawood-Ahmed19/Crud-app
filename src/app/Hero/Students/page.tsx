@@ -9,13 +9,13 @@ import {
 } from "@import/app/store/features/studentSlice";
 import { useEffect } from "react";
 
-interface StudentType {
-  id: number;
-  userId: string;
-  name: string;
-  email: string;
-  contact: number;
-}
+// interface StudentType {
+//   id: number;
+//   userId: string;
+//   name: string;
+//   email: string;
+//   contact: number;
+// }
 
 const Students = () => {
   const dispatch = useDispatch();
@@ -23,10 +23,12 @@ const Students = () => {
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    const storedStudents = JSON.parse(
-      localStorage.getItem(`students_${userId}`) || "[]"
-    );
-    dispatch(setStudents(storedStudents));
+    if (typeof window !== "undefined") {
+      const storedStudents = JSON.parse(
+        localStorage.getItem(`students_${userId}`) || "[]"
+      );
+      dispatch(setStudents(storedStudents));
+    }
   }, [dispatch, userId]);
 
   return (
