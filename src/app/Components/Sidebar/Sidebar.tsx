@@ -21,7 +21,21 @@ import {
   logoutUser,
 } from "@import/app/store/features/userSlice";
 import { useRouter } from "next/navigation";
-import { setSelectedComponent } from "@import/app/store/features/uiSlice";
+
+interface SidebarItem {
+  name: string;
+  path: string;
+  icon: any;
+}
+
+const sideBarItems: SidebarItem[] = [
+  { name: "Home", path: "/Hero", icon: faHouse },
+  { name: "Course", path: "/Hero/course", icon: faBookmark },
+  { name: "Students", path: "/Hero/Students", icon: faGraduationCap },
+  { name: "Payments", path: "/Hero/payments", icon: faMoneyBill1 },
+  { name: "Reports", path: "/Hero/reports", icon: faChartColumn },
+  { name: "Settings", path: "/Hero/settings", icon: faGear },
+];
 
 const Sidebar = (): any => {
   const dispatch = useDispatch<AppDispatch>();
@@ -59,33 +73,16 @@ const Sidebar = (): any => {
         )}
       </span>
       <span className="flex flex-col gap-8">
-        <button className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faHouse} className="min-w-[20px]" />
-          Home
-        </button>
-        <button className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faBookmark} className="min-w-[20px]" />
-          Course
-        </button>
-        <button
-          onClick={() => dispatch(setSelectedComponent("Students"))}
-          className="flex items-center gap-2 cursor-pointer"
-        >
-          <FontAwesomeIcon icon={faGraduationCap} className="min-w-[20px]" />
-          Students
-        </button>
-        <button className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faMoneyBill1} className="min-w-[20px]" />
-          Payments
-        </button>
-        <button className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faChartColumn} className="min-w-[20px]" />
-          Reports
-        </button>
-        <button className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faGear} className="min-w-[20px]" />
-          Settings
-        </button>
+        {sideBarItems.map((item) => (
+          <button
+            key={item.name}
+            onClick={() => router.push(item.path)}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <FontAwesomeIcon icon={item.icon} className="min-w-[20px]" />
+            {item.name}
+          </button>
+        ))}
       </span>
       <span>
         <button

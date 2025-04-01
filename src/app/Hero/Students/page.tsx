@@ -1,7 +1,7 @@
 "use client";
-import StudentCard from "../StudentCard/StudentCard";
+import StudentCard from "../../Components/StudentCard/StudentCard";
 import { useDispatch, useSelector } from "react-redux";
-import StudentModal from "../StudentModal/StudentModal";
+import StudentModal from "../../Components/StudentModal/StudentModal";
 import { toggleModal } from "@import/app/store/features/modalSlice";
 import {
   addStudent,
@@ -30,7 +30,7 @@ const Students = () => {
   }, [dispatch, userId]);
 
   return (
-    <section className="w-full px-7 py-20 bg-gray-100">
+    <section className="w-full h-screen px-7 py-20 bg-gray-100">
       <div className="flex w-full items-center justify-between">
         <h1 className="font-bold text-3xl">Student List</h1>
         <button
