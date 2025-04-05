@@ -20,16 +20,16 @@ import { useEffect } from "react";
 const Students = () => {
   const dispatch = useDispatch();
   const students = useSelector((state: any) => state.students.students);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
+    const userId = localStorage.getItem("userId");
     if (typeof window !== "undefined") {
       const storedStudents = JSON.parse(
         localStorage.getItem(`students_${userId}`) || "[]"
       );
       dispatch(setStudents(storedStudents));
     }
-  }, [dispatch, userId]);
+  }, [dispatch]);
 
   return (
     <section className="w-full h-screen px-7 py-20 bg-gray-100">
