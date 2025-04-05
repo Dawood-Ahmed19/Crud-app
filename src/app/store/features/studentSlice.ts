@@ -2,8 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface Student {
   _id: string;
+  userId: string;
   name: string;
   contact: number;
+  email: string;
+  date: string;
 }
 
 interface StudentState {
@@ -33,9 +36,19 @@ const studentSlice = createSlice({
         (student) => student._id !== action.payload
       );
     },
+    updateStudent: (state, action: PayloadAction<Student>) => {
+      state.students = state.students.map((s) =>
+        s._id === action.payload._id ? action.payload : s
+      );
+    },
   },
 });
 
-export const { addStudent, setStudents, clearStudents, deleteStudent } =
-  studentSlice.actions;
+export const {
+  addStudent,
+  setStudents,
+  clearStudents,
+  deleteStudent,
+  updateStudent,
+} = studentSlice.actions;
 export default studentSlice.reducer;

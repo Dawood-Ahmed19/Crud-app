@@ -4,8 +4,9 @@ import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { deleteStudent } from "@import/app/store/features/studentSlice";
+import { openEditModal } from "@import/app/store/features/modalSlice";
 import { Student } from "@import/app/store/features/studentSlice";
-const StudentCard = ({ student }: { student: any }) => {
+const StudentCard = ({ student }: { student: Student }) => {
   const dispatch = useDispatch();
   const handleDelete = (id: string) => {
     const userId = localStorage.getItem("userId");
@@ -25,6 +26,10 @@ const StudentCard = ({ student }: { student: any }) => {
     dispatch(deleteStudent(id));
   };
 
+  const handleEdit = () => {
+    dispatch(openEditModal(student));
+  };
+
   return (
     <div className="flex w-full items-center justify-between py-8 px-4 bg-white rounded-lg">
       <p className="w-1/4">{student.name}</p>
@@ -34,6 +39,7 @@ const StudentCard = ({ student }: { student: any }) => {
       <div className="w-1/12 flex gap-4 justify-center">
         <FontAwesomeIcon
           icon={faPencil}
+          onClick={handleEdit}
           className="text-blue-500 cursor-pointer"
         />
         <button onClick={() => handleDelete(student._id)}>
